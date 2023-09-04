@@ -1,0 +1,27 @@
+body {
+    
+}
+
+main {
+    display:flex;
+    align-items:flex-start;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 50%;
+}
+
+textarea {
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+#submitted_tasks {
+    display:flex;
+    flex-direction: column;
+}
+
+.checked_item {
+    text-decoration: line-through;
+    color:lightgray;
+    font-style: italic;
+}
