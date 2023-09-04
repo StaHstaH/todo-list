@@ -1,5 +1,17 @@
 let items = new Array();
 
+if (localStorage.getItem("savedItems")) {
+    const savedItems = localStorage.getItem("savedItems");
+    // console.log(savedItems + " To jest to");
+    items = JSON.parse(savedItems);
+    displayItems();
+}
+
+function saveItems() {
+    let savedStrings = JSON.stringify(items);
+    localStorage.setItem("savedItems", savedStrings);
+}
+
 function createItem() {
     let textArea = document.getElementById('todo_input');
     let item = {
@@ -8,6 +20,7 @@ function createItem() {
     };
     items.push(item);
     displayItems();
+    saveItems();
 }
 
 function displayItems() {
@@ -34,7 +47,7 @@ function displayItems() {
 }
 
 function checkBoxChange(index) {
-    console.log('test' +index);
+    // console.log('test' +index);
     // items.splice(index, 1);
     const changedItem = items[index];
     if(changedItem.itemState === true){
@@ -43,5 +56,6 @@ function checkBoxChange(index) {
         changedItem.itemState = true;
     }
     displayItems();
+    saveItems();
 }
 
