@@ -14,9 +14,11 @@ function saveItems() {
 
 function createItem() {
     let textArea = document.getElementById('todo_input');
+    let priority = document.getElementById('priority');
     let item = {
         itemName: textArea.value,
         itemState: false,
+        itemPriority: priority.value
     };
     items.push(item);
     displayItems();
@@ -30,20 +32,39 @@ function displayItems() {
         //for (const element of items) {
         for (let i = 0; i < items.length; i++) {
             const element = items[i];
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.setAttribute("onclick", "checkBoxChange("+i+")");
-            const para = document.createElement("p");
-            para.appendChild(checkbox);
-                if(element.itemState === true) {
-                    para.setAttribute("class", "checked_item");
-                    checkbox.checked = true;
-                }
-            let newElement = document.createTextNode(element.itemName);
-            para.appendChild(newElement);
+            const para = displaySingle(element, i);
             container.appendChild(para);
-            
         }
+}
+
+function displaySingle(element, i) {
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.setAttribute("onclick", "checkBoxChange("+i+")");
+    const para = document.createElement("p");
+    para.appendChild(checkbox);
+        if(element.itemState === true) {
+            para.setAttribute("class", "checked_item");
+            checkbox.checked = true;
+        }
+    let newElement = document.createTextNode(element.itemName);
+    para.appendChild(newElement);
+    const priority = document.createElement("span");
+    para.appendChild(priority);
+    let newPriority = document.createTextNode(priorityToText(element.itemPriority));
+    priority.appendChild(newPriority);
+    priority.setAttribute("class", "priority_level_" +element.itemPriority);
+    return para;
+            
+}
+
+function priorityToText(priority) {
+    const n = parseInt(priority);
+    let result = "";
+    for (let i = 0; i < n; i++) {
+            result = result + " !";
+        }
+    return result;
 }
 
 function checkBoxChange(index) {
