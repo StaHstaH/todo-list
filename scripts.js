@@ -28,8 +28,7 @@ function createItem() {
 function displayItems() {
     let container = document.getElementById('submitted_tasks');
     container.innerHTML = '';
-    
-        //for (const element of items) {
+    items.sort(compareItems);
         for (let i = 0; i < items.length; i++) {
             const element = items[i];
             const para = displaySingle(element, i);
@@ -65,6 +64,19 @@ function priorityToText(priority) {
             result = result + " !";
         }
     return result;
+}
+
+function compareItems(item1, item2) {
+    let priority1 = parseInt(item1.itemPriority);
+    let priority2 = parseInt(item2.itemPriority);
+
+    if (priority1 < priority2) {
+        return 1;
+    } else if (priority1 > priority2) {
+        return -1;
+    } else {
+        return 0;
+    }
 }
 
 function checkBoxChange(index) {
