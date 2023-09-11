@@ -22,6 +22,7 @@ function createItem() {
     };
     items.push(item);
     displayItems();
+
     saveItems();
 }
 
@@ -34,6 +35,7 @@ function displayItems() {
             const para = displaySingle(element, i);
             container.appendChild(para);
         }
+    updateTaskNumber();
 }
 
 function displaySingle(element, i) {
@@ -79,9 +81,20 @@ function compareItems(item1, item2) {
     }
 }
 
+function updateTaskNumber() {
+    let taskNumber = 0;
+    for(let i = 0; i < items.length; i++) {
+        const element = items[i];
+        if (element.itemState == false) {
+             taskNumber = taskNumber + 1;
+        }
+        
+    }
+    let span = document.getElementById('item_number');
+        span.innerHTML = taskNumber;
+}
+
 function checkBoxChange(index) {
-    // console.log('test' +index);
-    // items.splice(index, 1);
     const changedItem = items[index];
     if(changedItem.itemState === true){
         changedItem.itemState = false;
