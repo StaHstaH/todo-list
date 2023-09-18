@@ -27,6 +27,7 @@ button {
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
     border: none;
+    margin: 0.5rem 0.5rem;
 }
 
 .submit_area {
@@ -34,6 +35,7 @@ button {
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    flex-wrap:wrap;
 }
 
 textarea {
@@ -41,8 +43,12 @@ textarea {
     resize:none;
     max-width: 20rem;
     height: 1rem;
-    margin: 1rem;
+    margin: 0.5rem;
     padding: 0 1rem;
+}
+
+#date {
+    margin: 0.5rem 0.5rem;
 }
 
 #submitted_tasks {
@@ -61,6 +67,10 @@ textarea {
     color:lightgray;
     font-style: italic;
     padding: 0.5rem 1rem;
+}
+
+#priority {
+    margin: 0.5rem 0.5rem;
 }
 
 .priority_level_1 {
