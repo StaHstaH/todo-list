@@ -6,6 +6,8 @@ if (localStorage.getItem("savedItems")) {
     displayItems();
 }
 
+validateInput();
+
 function saveItems() {
     let savedStrings = JSON.stringify(items);
     localStorage.setItem("savedItems", savedStrings);
@@ -22,10 +24,12 @@ function displaySingle (element,i,container) {
 
 //  let labelText = document.createTextNode("")
  let heading = document.createElement("h2");
+ let newHeading = document.createTextNode(element.itemName);
+    heading.appendChild(newHeading);
  let span = document.createElement("span");
     itemLabel.appendChild(heading);
     heading.appendChild(span);
- let newElement = document.createTextNode(element.itemName);
+ let newElement = document.createTextNode(element.dueDate);
     span.appendChild(newElement);
     container.appendChild(checkbox);
     container.appendChild(itemLabel);
@@ -40,21 +44,40 @@ if(element.itemState === true) {
     checkbox.checked = true;    
     }
 
+const currentDate = new Date();
+const dueDate = new Date(element.dueDate);  
+
+if(dueDate < currentDate) {
+    itemLabel.setAttribute("class", "overdue_task");
+}
 
 }
 
 function createItem() {
     let textArea = document.getElementById('todo_input');
     let priority = document.getElementById('priority');
+    let dueDate = document.getElementById('date');
     let item = {
         itemName: textArea.value,
         itemState: false,
-        itemPriority: priority.value
+        itemPriority: priority.value,
+        dueDate: dueDate.value,
     };
     items.push(item);
     displayItems();
-
     saveItems();
+}
+
+function validateInput() {
+    let input = document.getElementById('todo_input');
+    if(input.value === '') {
+        input.setAttribute("class", "warning");
+        let button = document.getElementById('button');
+        button.disabled = true;
+    } else {
+        button.disabled = false;
+        input.setAttribute("class", '');
+    }
 }
 
 function deleteItem(i) {
