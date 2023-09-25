@@ -83,6 +83,7 @@ function validateInput() {
 function deleteItem(i) {
     items.splice(i, 1);
     displayItems();
+    saveItems();
 }
 
 
