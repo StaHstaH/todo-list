@@ -55,40 +55,118 @@ textarea {
     display:flex;
     flex-direction: column;
     font-family: "Lato", sans-serif;
-    font-size: 1.25rem; 
+    font-size: 1.25rem;
+    width: 20rem;
+    height: 25rem;
 }
 
 #submitted_tasks p {
     margin: 0.5rem;
 }
 
-.checked_item {
+.delete_button {
+    background-color:black;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 100%;
+    padding: 0;
+    position: absolute;
+    right: 2.5rem;
+    bottom: 14.5px;
+    cursor:pointer;
+}
+
+/* .checked_item {
     text-decoration: line-through;
     color:lightgray;
     font-style: italic;
     padding: 0.5rem 1rem;
-}
+} */
 
 #priority {
     margin: 0.5rem 0.5rem;
 }
 
 .priority_level_1 {
-    color: #339900;
+    background-color: #339900;
 }
 
 .priority_level_2 {
-    color: #ccff33;
+    background-color: #ccff33;
 }
 
 .priority_level_3 {
-    color: #ffcc00;
+    background-color: #ffcc00;
 }
 
 .priority_level_4 {
-    color: #ff9933;
+    background-color: #ff9933;
 }
 
 .priority_level_5 {
-    color: #ff0000;
+    background-color: #ff0000;
+}
+
+
+input[type=checkbox] {
+    display: none;
+}
+
+
+label {
+    background: #ae5f75;
+    height: 4rem;
+    max-width: 100%;
+    display: block;
+    border-bottom: 1px solid #2C3E50;
+    color: #fff;
+    text-transform: capitalize;
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-indent: 20px;
+    cursor: pointer;
+    transition: all 0.7s ease;
+    position: relative;
+    padding: 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+label h2 span {
+    display: block;
+    font-size: 12px;
+    text-transform: capitalize;
+    font-weight: normal;
+    color: #fff;
+}
+
+label:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    display: block;
+    position: absolute;
+    border-radius: 100%;
+    right: 20px;
+    top: 30%;
+    transition: border 0.7s ease;
+}
+
+
+.checked_item {
+    background: #6d335c;
+    border-bottom: 1px solid #34495E;
+    color: #d37b79;
+}
+
+.checked_item h2 span {
+    color: #f6bd66;
+}
+
+.checked_item:before {
+background: white url('images/tick_image2.png') no-repeat center center;
+    
 }
