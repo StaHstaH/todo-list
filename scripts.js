@@ -113,6 +113,12 @@ function deleteItem(i, itemsArray) {
     saveItems();
 }
 
+function deleteDoneItems() {
+    checkedItems = [];
+    displayItems();
+    saveItems();
+}
+
 
 function displayItems() {
     let container = document.getElementById('submitted_tasks');
