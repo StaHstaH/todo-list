@@ -1,25 +1,38 @@
 let items = new Array();
+let checkedItems = new Array();
 
 if (localStorage.getItem("savedItems")) {
     const savedItems = localStorage.getItem("savedItems");
     items = JSON.parse(savedItems);
-    displayItems();
+
 }
 
+if (localStorage.getItem("savedCheckedItems")) {
+    const savedItems = localStorage.getItem("savedCheckedItems");
+    checkedItems = JSON.parse(savedItems);
+}
+
+displayItems();
 validateInput();
 
 function saveItems() {
-    let savedStrings = JSON.stringify(items);
-    localStorage.setItem("savedItems", savedStrings);
+    let itemsString = JSON.stringify(items);
+    let checkedItemsString = JSON.stringify(checkedItems);
+    localStorage.setItem("savedItems", itemsString);
+    localStorage.setItem("savedCheckedItems", checkedItemsString);
 }
 
+
+
 function displaySingle (element,i,container) {
+ let arrayName = element.itemState ? 'checkedItems' : 'items' ;
  let checkbox = document.createElement("input");
+ let checkboxId = "checkbox_" +i+ "_" +arrayName;
     checkbox.type = "checkbox";
-    checkbox.setAttribute("onclick", "checkBoxChange("+i+")");
-    checkbox.setAttribute("id", "checkbox_" +i);
+    checkbox.setAttribute("onclick", "checkBoxChange("+i+ ',' +arrayName+")");
+    checkbox.setAttribute("id", checkboxId);
  let itemLabel = document.createElement("label");
-    itemLabel.setAttribute("for", "checkbox_" +i);
+    itemLabel.setAttribute("for", checkboxId);
     itemLabel.setAttribute("class", "priority_level_" +element.itemPriority);
 
 //  let labelText = document.createTextNode("")
@@ -34,15 +47,12 @@ function displaySingle (element,i,container) {
     container.appendChild(checkbox);
     container.appendChild(itemLabel);
 
+
+
 let deleteButton = document.createElement("button");
     span.appendChild(deleteButton);
-    deleteButton.setAttribute("onclick", "deleteItem("+i+")");
+    deleteButton.setAttribute("onclick", "deleteItem("+i+ ',' +arrayName+")");
     deleteButton.setAttribute("class", "delete_button");
-
-if(element.itemState === true) {
-    itemLabel.setAttribute("class", "checked_item");
-    checkbox.checked = true;    
-    }
 
 const currentDate = new Date();
 const dueDate = new Date(element.dueDate);  
@@ -51,6 +61,10 @@ if(dueDate < currentDate) {
     itemLabel.setAttribute("class", "overdue_task");
 }
 
+if(element.itemState === true) {
+    itemLabel.setAttribute("class", "checked_item");
+    checkbox.checked = true;    
+    }
 }
 
 function createItem() {
@@ -69,19 +83,32 @@ function createItem() {
 }
 
 function validateInput() {
-    let input = document.getElementById('todo_input');
-    if(input.value === '') {
-        input.setAttribute("class", "warning");
-        let button = document.getElementById('button');
+    let textInput = document.getElementById('todo_input');
+    let dateInput = document.getElementById('date');
+    let button = document.getElementById('button');
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    const dueDate = new Date(dateInput.value);
+
+    const textValid = textInput.value === '';
+    const dateValid = dueDate < currentDate;
+    if(textValid || dateValid) {
+        if (textValid) {
+            textInput.setAttribute("class", "warning");
+        };
+        if (dateValid) {
+            dateInput.setAttribute("class", "warning");
+        }
         button.disabled = true;
     } else {
         button.disabled = false;
-        input.setAttribute("class", '');
+        textInput.setAttribute("class", '');
+        dateInput.setAttribute("class", '');
     }
 }
 
-function deleteItem(i) {
-    items.splice(i, 1);
+function deleteItem(i, itemsArray) {
+    itemsArray.splice(i, 1);
     displayItems();
     saveItems();
 }
@@ -96,6 +123,14 @@ function displayItems() {
             displaySingle(element, i, container);
         }
     updateTaskNumber();
+
+    container = document.getElementById('done_tasks');
+    container.innerHTML = '';
+    checkedItems.sort(compareItems);
+        for (let i = 0; i < checkedItems.length; i++) {
+            const element = checkedItems[i];
+            displaySingle(element, i, container);
+        }
 }
 
 function priorityToText(priority) {
@@ -137,14 +172,17 @@ function updateTaskNumber() {
         span.innerHTML = taskNumber;
 }
 
-function checkBoxChange(index) {
-    const changedItem = items[index];
+function checkBoxChange(index, itemsArray) {
+    const changedItem = itemsArray[index];
         if(changedItem.itemState === true){
             changedItem.itemState = false;
+            itemsArray.splice(index, 1);
+            items.push(changedItem);
         } else {
             changedItem.itemState = true;
+            itemsArray.splice(index, 1);
+            checkedItems.push(changedItem);
         }
-    // items.splice(index, 1);
         displayItems();
         saveItems();
 }

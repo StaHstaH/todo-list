@@ -22,13 +22,14 @@
             <option value="4">4</option>
             <option value="5">5</option>
         </select>
-        <input type="date" id="date" name="date-selector">
+        <input type="date" id="date" name="date-selector" oninput="validateInput()">
         <button id="button" onclick="createItem()">Submit</button>
         </div>
         <div id="items_todo">
             <p>You have <span id="item_number"></span> items on your ToDo list</p>
         </div>
         <div id="submitted_tasks"></div>
+        <div id="done_tasks"></div>
     </main>
 
 <script src="scripts.js"></script>

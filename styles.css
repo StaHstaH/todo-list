@@ -51,7 +51,7 @@ textarea {
     margin: 0.5rem 0.5rem;
 }
 
-#submitted_tasks {
+#submitted_tasks, #done_tasks {
     display:flex;
     flex-direction: column;
     font-family: "Lato", sans-serif;
@@ -144,6 +144,10 @@ label {
     -webkit-box-sizing: border-box;
 }
 
+label:hover {
+    background: blue;
+}
+
 label h2 span {
     display: block;
     font-size: 12px;
@@ -166,7 +170,7 @@ label:before {
 }
 
 
-.checked_item {
+.checked_item, .checked_item:hover {
     background: #6d335c;
     border-bottom: 1px solid #34495E;
     color: #d37b79;
