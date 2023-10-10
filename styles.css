@@ -88,27 +88,27 @@ textarea {
 }
 
 .priority_level_1 {
-    background-color: #339900;
+    background-color: #CAECE8;
 }
 
 .priority_level_2 {
-    background-color: #ccff33;
+    background-color: #C3E7FE;
 }
 
 .priority_level_3 {
-    background-color: #ffcc00;
+    background-color: #9FDDD8;
 }
 
 .priority_level_4 {
-    background-color: #ff9933;
+    background-color: #90D0FE;
 }
 
 .priority_level_5 {
-    background-color: #990000; 
+    background-color: #FFD66D; 
 }
 
 .overdue_task {
-    background-color: #ff0000;
+    background-color: #FF9292;
     font-size: 15px;
 }
 
@@ -129,7 +129,7 @@ label {
     max-width: 100%;
     display: block;
     border-bottom: 1px solid #2C3E50;
-    color: #fff;
+    color: #000;
     text-transform: capitalize;
     font-weight: 900;
     font-size: 11px;
@@ -145,7 +145,7 @@ label {
 }
 
 label:hover {
-    background: blue;
+    background: #C2B8FF;
 }
 
 label h2 span {
@@ -153,7 +153,7 @@ label h2 span {
     font-size: 12px;
     text-transform: capitalize;
     font-weight: normal;
-    color: #fff;
+    color: #000;
 }
 
 label:before {
